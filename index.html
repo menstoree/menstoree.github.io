@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0A1628" />
+  <title>NOM DE LA BOUTIQUE — Produits numériques</title>
+  <meta name="description" content="Boutique de produits numériques : ebooks, guides pratiques et formations conçus pour vous aider à progresser concrètement. Paiement sécurisé via Chariow." />
+  <meta property="og:title" content="NOM DE LA BOUTIQUE — Produits numériques" />
+  <meta property="og:description" content="Des ressources numériques claires, concrètes et actionnables." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ======================= HEADER ======================= -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#top" class="brand" aria-label="Accueil">
+      <span class="brand-logo" id="brandLogo" aria-hidden="true">◆</span>
+      <span class="brand-name" id="brandName">NOM DE LA BOUTIQUE</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#boutique">Boutique</a>
+      <a href="#produits">Produits</a>
+      <a href="#preuves">Avis</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#" class="btn btn-primary btn-sm header-cta" id="headerCta" data-link="store">
+      Accéder à la boutique
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ======================= SECTION 1 : BOUTIQUE ======================= -->
+  <section class="hero" id="boutique">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="badge" id="heroBadge">Boutique de produits numériques</span>
+        <h1 id="heroTitle">
+          Des ressources numériques pour progresser,<br/>
+          sans détour.
+        </h1>
+        <p class="lead" id="heroSubtitle">
+          Ebooks, guides pratiques et formations conçus pour vous apporter des méthodes
+          claires, actionnables et directement applicables.
+        </p>
+        <div class="hero-ctas">
+          <a href="#produits" class="btn btn-primary btn-lg" id="heroPrimary">
+            Découvrir nos produits
+          </a>
+          <a href="#" class="btn btn-ghost btn-lg" id="heroSecondary" data-link="store">
+            Accéder à la boutique
+          </a>
+        </div>
+
+        <ul class="hero-stats" id="heroStats" aria-label="Points clés"></ul>
+      </div>
+
+      <div class="hero-visual" id="heroVisual" aria-label="Visuel principal de la boutique">
+        <!-- Rendu dynamique par script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MISSION & VALEURS ======================= -->
+  <section class="mission" id="mission">
+    <div class="container">
+      <header class="section-head">
+        <span class="eyebrow">Notre approche</span>
+        <h2 id="missionTitle">Une boutique pensée pour des résultats concrets</h2>
+        <p id="missionText">
+          Nous créons des ressources numériques qui vont à l'essentiel : des contenus
+          structurés, testés et faciles à appliquer, pour vous faire gagner du temps.
+        </p>
+      </header>
+      <div class="values-grid" id="valuesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ======================= SECTION 2 : PRODUITS ======================= -->
+  <section class="section products" id="produits">
+    <div class="container">
+      <header class="section-head">
+        <span class="eyebrow">Nos produits</span>
+        <h2 id="productsTitle">Quelques exemples de nos ressources</h2>
+        <p id="productsSubtitle">
+          Chaque produit répond à un besoin précis. Les achats sont sécurisés
+          et s'effectuent sur Chariow.
+        </p>
+      </header>
+
+      <div class="product-grid" id="productGrid"></div>
+
+      <div class="products-cta">
+        <a href="#" class="btn btn-outline btn-lg" id="productsAllCta" data-link="store">
+          Voir toute la boutique sur Chariow
+        </a>
+        <p class="microcopy">Paiement sécurisé · Accès immédiat après achat</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SECTION 3 : PREUVES ======================= -->
+  <section class="section proof" id="preuves">
+    <div class="container">
+
+      <!-- 3.A — TÉMOIGNAGES WHATSAPP -->
+      <header class="section-head section-head-light">
+        <span class="eyebrow eyebrow-light">Retours clients</span>
+        <h2 id="testimonialsTitle">Ils ont testé, voici leurs retours</h2>
+        <p id="testimonialsSubtitle">
+          Captures d'écran authentiques de discussions WhatsApp avec nos clients.
+        </p>
+      </header>
+
+      <div class="wa-grid" id="waGrid"></div>
+
+      <p class="proof-note">
+        Les informations personnelles visibles sur les captures (noms, numéros)
+        sont masquées ou anonymisées.
+      </p>
+
+      <!-- 3.B — PERFORMANCES -->
+      <header class="section-head section-head-light section-head-sub">
+        <span class="eyebrow eyebrow-light">Résultats</span>
+        <h2 id="performanceTitle">Des progrès concrets</h2>
+        <p id="performanceSubtitle">
+          Captures d'écran et indicateurs partagés par des clients ayant appliqué
+          les méthodes proposées.
+        </p>
+      </header>
+
+      <div class="metrics-row" id="metricsRow"></div>
+      <div class="perf-grid" id="perfGrid"></div>
+    </div>
+  </section>
+
+  <!-- ======================= FAQ (composant annexe) ======================= -->
+  <section class="section faq" id="faq">
+    <div class="container container-narrow">
+      <header class="section-head">
+        <span class="eyebrow">Questions fréquentes</span>
+        <h2 id="faqTitle">Vous avez des questions ?</h2>
+      </header>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- ======================= CTA FINAL ======================= -->
+  <section class="cta-final">
+    <div class="container cta-inner">
+      <h2>Prêt à découvrir nos ressources ?</h2>
+      <p>Tous nos produits sont disponibles sur notre boutique officielle Chariow.</p>
+      <a href="#" class="btn btn-primary btn-lg" id="finalCta" data-link="store">
+        Accéder à la boutique
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+
+    <div class="footer-col footer-brand">
+      <a href="#top" class="brand brand-light">
+        <span class="brand-logo" id="footerLogo" aria-hidden="true">◆</span>
+        <span class="brand-name" id="footerName">NOM DE LA BOUTIQUE</span>
+      </a>
+      <p class="footer-about" id="footerAbout"></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <ul id="footerNav"></ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul id="footerContact"></ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Réseaux</h4>
+      <ul id="footerSocials"></ul>
+    </div>
+
+  </div>
+
+  <div class="container footer-bottom">
+    <span id="footerCopyright">© <span id="year"></span> NOM DE LA BOUTIQUE. Tous droits réservés.</span>
+    <ul class="legal" id="footerLegal"></ul>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Aperçu image">
+  <button class="lightbox-close" aria-label="Fermer">×</button>
+  <img alt="" />
+</div>
+
+<noscript>
+  <div style="padding:32px;text-align:center;font-family:sans-serif;background:#0A1628;color:#fff">
+    Activez JavaScript pour afficher toutes les sections de la boutique.
+  </div>
+</noscript>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
