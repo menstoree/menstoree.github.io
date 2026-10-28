@@ -11,7 +11,7 @@ const CONFIG = {
     name: "MENSTORE",
     logoText: "◆",                    // symbole affiché à la place du logo
     logoImage: "IMG_5245.png",                    // ex: "images/logo.png" (laisser vide pour le symbole)
-    chariowUrl: "",                   // ⚠️ LIEN GÉNÉRAL CHARIOW — laisser vide pour l'instant
+    chariowUrl: "https://encvafzw.mychariow.shop",                   // ⚠️ LIEN GÉNÉRAL CHARIOW — laisser vide pour l'instant
     tagline: "Produits numériques conçus pour vous faire progresser.",
     email: "",                        // À RENSEIGNER
     phone: "",                        // À RENSEIGNER
@@ -111,9 +111,9 @@ const CONFIG = {
     subtitle: "Captures d'écran authentiques de discussions WhatsApp avec nos clients.",
     items: [
       { image: "IMG_5046.png", alt: "Témoignage client 1", caption: "" },
-      { image: "IMG_", alt: "Témoignage client 2", caption: "" },
-      { image: "IMG_", alt: "Témoignage client 3", caption: "" },
-      { image: "IMG_", alt: "Témoignage client 4", caption: "" }
+      { image: "IMG_5047.jpeg", alt: "Témoignage client 2", caption: "" },
+      { image: "IMG_5048.jpeg", alt: "Témoignage client 3", caption: "" },
+      { image: "IMG_5050.jpeg", alt: "Témoignage client 4", caption: "" }
     ]
   },
 
