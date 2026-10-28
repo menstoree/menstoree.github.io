@@ -1,0 +1,164 @@
+/* =====================================================================
+   ⚙️ CONFIGURATION CENTRALE
+   Modifiez UNIQUEMENT ce fichier pour adapter la maquette à votre boutique.
+   Tous les champs marqués "À RENSEIGNER" sont des emplacements provisoires.
+   ===================================================================== */
+
+const CONFIG = {
+
+  /* ========== IDENTITÉ DE LA BOUTIQUE ========== */
+  store: {
+    name: "NOM DE LA BOUTIQUE",
+    logoText: "◆",                    // symbole affiché à la place du logo
+    logoImage: "",                    // ex: "images/logo.png" (laisser vide pour le symbole)
+    chariowUrl: "",                   // ⚠️ LIEN GÉNÉRAL CHARIOW — laisser vide pour l'instant
+    tagline: "Produits numériques conçus pour vous faire progresser.",
+    email: "",                        // À RENSEIGNER
+    phone: "",                        // À RENSEIGNER
+    whatsapp: "",                     // À RENSEIGNER (format: https://wa.me/XXXXX)
+    location: "",                     // À RENSEIGNER
+    socials: {
+      instagram: "",                  // À RENSEIGNER
+      facebook:  "",
+      tiktok:    "",
+      youtube:   "",
+      linkedin:  ""
+    }
+  },
+
+  /* ========== SECTION 1 — HERO & PRÉSENTATION ========== */
+  hero: {
+    badge: "Boutique de produits numériques",
+    title: "Des ressources numériques pour progresser, sans détour.",
+    subtitle: "Ebooks, guides pratiques et formations conçus pour vous apporter des méthodes claires, actionnables et directement applicables.",
+    primaryCta: "Découvrir nos produits",
+    secondaryCta: "Accéder à la boutique",
+    image: "",                        // chemin optionnel : "images/hero.jpg"
+    placeholderIcon: "◈",
+    placeholderTitle: "Visuel principal",
+    placeholderSub: "Emplacement réservé — ajoutez une image, une illustration ou une capture",
+    stats: [
+      { value: "100%",       label: "Numérique" },
+      { value: "Instantané", label: "Accès immédiat" },
+      { value: "Sécurisé",   label: "Via Chariow" }
+    ]
+  },
+
+  /* ========== MISSION & VALEURS ========== */
+  mission: {
+    title: "Une boutique pensée pour des résultats concrets",
+    text: "Nous créons des ressources numériques qui vont à l'essentiel : des contenus structurés, testés et faciles à appliquer, pour vous faire gagner du temps.",
+    values: [
+      { icon: "◆", title: "Clarté",   text: "Des contenus structurés, lisibles, sans jargon inutile." },
+      { icon: "◇", title: "Qualité",  text: "Des ressources conçues avec soin, mises à jour régulièrement." },
+      { icon: "◈", title: "Résultats", text: "Des méthodes actionnables dès le premier jour." }
+    ]
+  },
+
+  /* ========== SECTION 2 — PRODUITS ==========
+     Pour ajouter un produit : dupliquez un bloc.
+     • name / description / benefits / price / category → À RENSEIGNER
+     • image : laisser "" pour afficher l'emplacement réservé
+     • url   : lien direct Chariow du produit. Laisser "" → bouton "Lien à renseigner"
+  ============================================= */
+  products: {
+    title: "Quelques exemples de nos ressources",
+    subtitle: "Chaque produit répond à un besoin précis. Les achats sont sécurisés et s'effectuent sur Chariow.",
+    items: [
+      {
+        id: "produit-1",
+        name: "Nom du produit #1",
+        category: "Ebook",
+        image: "",
+        description: "Description courte du produit. Décrivez ici la valeur principale et le problème résolu.",
+        benefits: ["Bénéfice principal 1", "Bénéfice principal 2", "Bénéfice principal 3"],
+        price: "",
+        priceNote: "Paiement unique",
+        url: ""                        // ⚠️ LIEN CHARIOW DU PRODUIT
+      },
+      {
+        id: "produit-2",
+        name: "Nom du produit #2",
+        category: "Guide pratique",
+        image: "",
+        description: "Description courte du produit. Décrivez ici la valeur principale et le problème résolu.",
+        benefits: ["Bénéfice principal 1", "Bénéfice principal 2", "Bénéfice principal 3"],
+        price: "",
+        priceNote: "Paiement unique",
+        url: ""
+      },
+      {
+        id: "produit-3",
+        name: "Nom du produit #3",
+        category: "Formation",
+        image: "",
+        description: "Description courte du produit. Décrivez ici la valeur principale et le problème résolu.",
+        benefits: ["Bénéfice principal 1", "Bénéfice principal 2", "Bénéfice principal 3"],
+        price: "",
+        priceNote: "Paiement unique",
+        url: ""
+      }
+    ]
+  },
+
+  /* ========== SECTION 3.A — TÉMOIGNAGES WHATSAPP ==========
+     image : "images/wa-1.jpg" → la carte devient cliquable (lightbox)
+     Laisser "" pour afficher un emplacement réservé.
+     ⚠️ Masquez les infos personnelles avant import.
+  ========================================================= */
+  testimonials: {
+    title: "Ils ont testé, voici leurs retours",
+    subtitle: "Captures d'écran authentiques de discussions WhatsApp avec nos clients.",
+    items: [
+      { image: "", alt: "Témoignage client 1", caption: "" },
+      { image: "", alt: "Témoignage client 2", caption: "" },
+      { image: "", alt: "Témoignage client 3", caption: "" },
+      { image: "", alt: "Témoignage client 4", caption: "" }
+    ]
+  },
+
+  /* ========== SECTION 3.B — PERFORMANCES ==========
+     metrics : indicateurs chiffrés (laisser [] pour masquer la rangée)
+     items   : captures d'écran de résultats
+  ================================================= */
+  performance: {
+    title: "Des progrès concrets",
+    subtitle: "Captures d'écran et indicateurs partagés par des clients ayant appliqué les méthodes proposées.",
+    metrics: [],                      // ex: { value: "+40%", label: "Progression", note: "Sur 30 jours" }
+    items: [
+      { image: "", alt: "Résultat 1", title: "Titre de la preuve #1", context: "Courte explication du contexte : qui, quoi, sur quelle durée." },
+      { image: "", alt: "Résultat 2", title: "Titre de la preuve #2", context: "Courte explication du contexte : qui, quoi, sur quelle durée." }
+    ]
+  },
+
+  /* ========== FAQ (composant annexe) ========== */
+  faq: {
+    title: "Vous avez des questions ?",
+    items: [
+      { q: "Où s'effectuent les achats ?",
+        a: "Toutes les transactions sont réalisées sur Chariow, notre plateforme de vente sécurisée. Vous êtes redirigé vers la page officielle de chaque produit." },
+      { q: "Les produits sont-ils numériques ?",
+        a: "Oui. Tous nos produits sont des ressources numériques (ebooks, guides, formations)." },
+      { q: "Comment accéder à mon achat ?",
+        a: "Après paiement sur Chariow, vous recevez immédiatement les instructions pour accéder à votre produit." },
+      { q: "Puis-je vous contacter ?",
+        a: "Bien sûr. Retrouvez nos coordonnées dans le pied de page. Nous répondons dans les meilleurs délais." }
+    ]
+  },
+
+  /* ========== FOOTER ========== */
+  footer: {
+    about: "Boutique de produits numériques conçus pour vous aider à progresser concrètement.",
+    nav: [
+      { label: "Boutique",  href: "#boutique" },
+      { label: "Produits",  href: "#produits" },
+      { label: "Avis",      href: "#preuves" },
+      { label: "FAQ",       href: "#faq" }
+    ],
+    legal: [
+      { label: "Mentions légales",     url: "#" },
+      { label: "Politique de confidentialité", url: "#" },
+      { label: "Conditions générales", url: "#" }
+    ]
+  }
+};
