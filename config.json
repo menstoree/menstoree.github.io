@@ -8,7 +8,7 @@ const CONFIG = {
 
   /* ========== IDENTITÉ DE LA BOUTIQUE ========== */
   store: {
-    name: "NOM DE LA BOUTIQUE",
+    name: "MENSTORE",
     logoText: "◆",                    // symbole affiché à la place du logo
     logoImage: "",                    // ex: "images/logo.png" (laisser vide pour le symbole)
     chariowUrl: "",                   // ⚠️ LIEN GÉNÉRAL CHARIOW — laisser vide pour l'instant
