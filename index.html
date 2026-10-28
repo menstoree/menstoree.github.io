@@ -4,24 +4,291 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0A1628" />
-  <title>NOM DE LA BOUTIQUE — Produits numériques</title>
-  <meta name="description" content="Boutique de produits numériques : ebooks, guides pratiques et formations conçus pour vous aider à progresser concrètement. Paiement sécurisé via Chariow." />
-  <meta property="og:title" content="NOM DE LA BOUTIQUE — Produits numériques" />
+  <title>MENSTORE — Produits numériques</title>
+  <meta name="description" content="MENSTORE : boutique de produits numériques. Ebooks, guides pratiques et formations conçus pour vous aider à progresser concrètement. Paiement sécurisé via Chariow." />
+  <meta property="og:title" content="MENSTORE — Produits numériques" />
   <meta property="og:description" content="Des ressources numériques claires, concrètes et actionnables." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===================== PALETTE & VARIABLES ===================== */
+    :root {
+      --navy:        #0A1628;
+      --navy-2:      #0F1E3D;
+      --navy-3:      #142A55;
+      --black:       #050A14;
+      --white:       #FFFFFF;
+      --text:        #0A1628;
+      --muted:       #5B6577;
+      --line:        #E4E7EC;
+      --surface:     #F7F9FC;
+      --accent:      #2563EB;
+      --accent-2:    #1D4ED8;
+      --radius:      16px;
+      --radius-sm:   10px;
+      --radius-lg:   24px;
+      --shadow-sm:   0 1px 2px rgba(10,22,40,.06), 0 1px 3px rgba(10,22,40,.04);
+      --shadow-md:   0 12px 32px -12px rgba(10,22,40,.18);
+      --shadow-lg:   0 30px 60px -25px rgba(10,22,40,.28);
+      --container:   1200px;
+    }
+
+    /* ===================== RESET & BASE ===================== */
+    *,*::before,*::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 16px; line-height: 1.6;
+      color: var(--text); background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+    h1,h2,h3,h4 { margin: 0; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+    .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+    .container-narrow { max-width: 820px; }
+
+    /* ===================== BOUTONS ===================== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 22px; border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 15px; line-height: 1;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      white-space: nowrap; cursor: pointer;
+    }
+    .btn-sm { padding: 10px 16px; font-size: 13.5px; }
+    .btn-lg { padding: 15px 26px; font-size: 15.5px; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); box-shadow: 0 12px 24px -10px rgba(37,99,235,.55); }
+    .btn-ghost { color: #fff; border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06); }
+    .btn-ghost:hover { background: rgba(255,255,255,.14); transform: translateY(-1px); }
+    .btn-outline { color: var(--navy); border: 1.5px solid var(--navy); background: transparent; }
+    .btn-outline:hover { background: var(--navy); color: #fff; transform: translateY(-1px); }
+    .btn-pending {
+      background: var(--surface); color: var(--muted) !important;
+      border: 1.5px dashed var(--line); cursor: not-allowed;
+      box-shadow: none !important; transform: none !important;
+    }
+
+    /* ===================== HEADER ===================== */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
+    .brand-logo { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--navy); color: #fff; font-size: 15px; font-weight: 800; }
+    .brand-name { font-size: 15px; letter-spacing: -.01em; color: var(--navy); }
+    .nav { display: flex; gap: 28px; }
+    .nav a { font-size: 14px; font-weight: 600; color: var(--muted); transition: color .2s ease; }
+    .nav a:hover { color: var(--navy); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative; padding: 96px 0 100px;
+      color: #fff;
+      background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+      overflow: hidden; isolation: isolate;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(900px 500px at 85% -10%, rgba(37,99,235,.35), transparent 60%),
+        radial-gradient(700px 500px at 0% 100%, rgba(37,99,235,.18), transparent 60%),
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 60px 60px,
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+    }
+    .hero-inner { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center; }
+    .badge {
+      display: inline-block; padding: 6px 14px; border-radius: 100px;
+      font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: #B8CCFF; background: rgba(37,99,235,.14); border: 1px solid rgba(37,99,235,.32);
+    }
+    .hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); letter-spacing: -.03em; line-height: 1.08; margin: 22px 0; }
+    .lead { font-size: 1.05rem; line-height: 1.65; color: rgba(255,255,255,.72); max-width: 540px; margin: 0 0 34px; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; margin: 48px 0 0; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1); }
+    .hero-stats li { display: flex; flex-direction: column; gap: 2px; }
+    .hero-stats strong { font-size: 17px; font-weight: 800; color: #fff; }
+    .hero-stats span { font-size: 11.5px; color: rgba(255,255,255,.55); letter-spacing: .06em; text-transform: uppercase; }
+
+    .hero-visual {
+      aspect-ratio: 4 / 4.4; border-radius: var(--radius-lg); overflow: hidden;
+      background: linear-gradient(160deg, rgba(37,99,235,.25), transparent 60%), var(--navy-2);
+      border: 1px solid rgba(255,255,255,.1); box-shadow: var(--shadow-lg);
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-placeholder {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; padding: 24px; text-align: center;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,.02), rgba(255,255,255,.02) 14px, rgba(255,255,255,.045) 14px, rgba(255,255,255,.045) 28px);
+    }
+    .hero-placeholder .ph-icon { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; background: rgba(37,99,235,.2); border: 1px solid rgba(37,99,235,.4); font-size: 26px; color: #fff; }
+    .hero-placeholder .ph-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .hero-placeholder .ph-sub { font-size: 12.5px; color: rgba(255,255,255,.55); max-width: 220px; line-height: 1.5; }
+
+    /* ===================== MISSION ===================== */
+    .mission { padding: 96px 0; background: var(--surface); }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .value-card { padding: 32px 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .value-card:hover { transform: translateY(-4px); border-color: #C9D2E0; box-shadow: var(--shadow-md); }
+    .value-card .value-icon { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(37,99,235,.08); color: var(--accent); font-size: 20px; margin-bottom: 18px; }
+    .value-card h3 { font-size: 16px; font-weight: 800; margin: 0 0 8px; }
+    .value-card p { font-size: 14.5px; color: var(--muted); margin: 0; line-height: 1.6; }
+
+    /* ===================== SECTIONS ===================== */
+    .section { padding: 100px 0; }
+    .section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+    .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 12px 0 14px; }
+    .section-head p { color: var(--muted); margin: 0; font-size: 16px; }
+    .eyebrow { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+    .eyebrow-light { color: #7EA0FF; }
+    .section-head-light h2 { color: #fff; }
+    .section-head-light p { color: rgba(255,255,255,.62); }
+    .section-head-sub { margin-top: 100px; }
+
+    /* ===================== PRODUITS ===================== */
+    .products { background: #fff; }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .product-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .product-card:hover { transform: translateY(-4px); border-color: #C9D2E0; box-shadow: var(--shadow-md); }
+    .product-media { position: relative; aspect-ratio: 4 / 3; background: linear-gradient(135deg, var(--navy-2), var(--navy-3)); overflow: hidden; }
+    .product-media img { width: 100%; height: 100%; object-fit: cover; }
+    .media-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; text-align: center; background: repeating-linear-gradient(135deg, rgba(255,255,255,.02), rgba(255,255,255,.02) 12px, rgba(255,255,255,.05) 12px, rgba(255,255,255,.05) 24px); color: #fff; }
+    .media-ph .ph-icon { width: 52px; height: 52px; border-radius: 12px; display: grid; place-items: center; background: rgba(37,99,235,.18); border: 1px solid rgba(37,99,235,.4); font-size: 22px; }
+    .media-ph .ph-text { font-size: 12.5px; color: rgba(255,255,255,.65); line-height: 1.4; }
+    .product-body { padding: 24px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+    .product-category { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: rgba(37,99,235,.08); align-self: flex-start; }
+    .product-body h3 { font-size: 17px; font-weight: 800; }
+    .product-desc { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.55; }
+    .benefits { display: flex; flex-direction: column; gap: 6px; }
+    .benefits li { font-size: 13.5px; display: flex; gap: 8px; align-items: flex-start; color: var(--text); }
+    .benefits li::before { content: "✓"; color: var(--accent); font-weight: 800; flex-shrink: 0; }
+    .product-footer { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .price { display: flex; flex-direction: column; }
+    .price strong { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+    .price small { font-size: 11.5px; color: var(--muted); }
+    .products-cta { text-align: center; margin-top: 48px; }
+    .microcopy { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+
+    /* ===================== PREUVES ===================== */
+    .proof { background: linear-gradient(180deg, var(--navy) 0%, var(--black) 100%); color: #fff; }
+    .wa-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .wa-card { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; }
+    .wa-card:hover { transform: translateY(-4px); border-color: rgba(37,99,235,.55); box-shadow: 0 20px 40px -20px rgba(37,99,235,.4); }
+    .wa-card img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+    .wa-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; text-align: center; cursor: default; background: repeating-linear-gradient(135deg, rgba(255,255,255,.02), rgba(255,255,255,.02) 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px); }
+    .wa-ph .ph-icon { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: rgba(37,99,235,.16); border: 1px solid rgba(37,99,235,.35); font-size: 20px; }
+    .wa-ph .ph-text { font-size: 12.5px; color: rgba(255,255,255,.6); line-height: 1.5; }
+    .wa-ph .ph-num { font-size: 10.5px; color: rgba(255,255,255,.35); letter-spacing: .1em; }
+    .wa-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; font-size: 12px; color: #fff; background: linear-gradient(180deg, transparent, rgba(0,0,0,.75)); text-align: left; }
+    .proof-note { text-align: center; font-size: 12.5px; color: rgba(255,255,255,.45); margin: 24px 0 0; font-style: italic; }
+
+    .metrics-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .metric-card { padding: 24px; border-radius: var(--radius); background: rgba(37,99,235,.08); border: 1px solid rgba(37,99,235,.28); }
+    .metric-card strong { display: block; font-size: 28px; font-weight: 800; letter-spacing: -.02em; }
+    .metric-card span { display: block; font-size: 13.5px; color: rgba(255,255,255,.7); margin-top: 4px; }
+    .metric-card small { display: block; font-size: 11.5px; color: rgba(255,255,255,.45); margin-top: 8px; }
+
+    .perf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .perf-card { border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: transform .25s ease, border-color .25s ease; }
+    .perf-card:hover { transform: translateY(-3px); border-color: rgba(37,99,235,.5); }
+    .perf-media { aspect-ratio: 16 / 10; background: rgba(255,255,255,.02); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,.08); position: relative; }
+    .perf-media img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+    .perf-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px; text-align: center; }
+    .perf-ph .ph-icon { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: rgba(37,99,235,.15); border: 1px solid rgba(37,99,235,.35); font-size: 20px; }
+    .perf-ph .ph-text { font-size: 12.5px; color: rgba(255,255,255,.6); }
+    .perf-body { padding: 20px 22px; }
+    .perf-body h4 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; color: #fff; }
+    .perf-body p { font-size: 13px; color: rgba(255,255,255,.62); margin: 0; line-height: 1.55; }
+
+    /* ===================== FAQ ===================== */
+    .faq { background: var(--surface); }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease; }
+    .faq-item[open] { border-color: rgba(37,99,235,.4); box-shadow: var(--shadow-sm); }
+    .faq-item summary { list-style: none; cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 15px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--muted); transition: transform .2s ease; line-height: 1; }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item p { margin: 0; padding: 0 22px 20px; color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+
+    /* ===================== CTA FINAL ===================== */
+    .cta-final { padding: 96px 0; text-align: center; color: #fff; background: radial-gradient(700px 400px at 50% 0%, rgba(37,99,235,.28), transparent 60%), linear-gradient(180deg, var(--navy), var(--black)); }
+    .cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); margin: 0 0 12px; }
+    .cta-inner p { color: rgba(255,255,255,.7); margin: 0 0 28px; font-size: 16px; }
+
+    /* ===================== FOOTER ===================== */
+    .site-footer { background: var(--black); color: rgba(255,255,255,.65); padding: 72px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .brand-light .brand-logo { background: var(--accent); }
+    .brand-light .brand-name { color: #fff; }
+    .footer-about { margin: 18px 0 0; font-size: 14px; line-height: 1.6; max-width: 320px; }
+    .footer-col h4 { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 18px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { font-size: 14px; transition: color .2s ease; }
+    .footer-col a:hover { color: #fff; }
+    .footer-col .placeholder-line { font-size: 13px; color: rgba(255,255,255,.35); font-style: italic; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 28px; font-size: 12.5px; }
+    .legal { display: flex; gap: 22px; flex-wrap: wrap; }
+    .legal a { font-size: 12.5px; }
+    .legal a:hover { color: #fff; }
+
+    /* ===================== LIGHTBOX ===================== */
+    .lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,.9); backdrop-filter: blur(6px); }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 8px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); }
+    .lightbox-close { position: absolute; top: 20px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 26px; line-height: 1; display: grid; place-items: center; }
+    .lightbox-close:hover { background: rgba(255,255,255,.22); }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { max-width: 480px; margin: 0 auto; aspect-ratio: 4 / 3; width: 100%; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .wa-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .hero { padding: 72px 0; }
+      .mission, .section { padding: 72px 0; }
+      .product-grid, .perf-grid, .values-grid { grid-template-columns: 1fr; }
+      .wa-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { width: 100%; }
+      .hero-stats { gap: 24px; }
+      .products-cta .btn { width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .wa-grid { grid-template-columns: 1fr; }
+      .header-inner { height: 64px; }
+      .brand-name { font-size: 14px; }
+      .header-cta { font-size: 12px; padding: 8px 12px; }
+    }
+  </style>
 </head>
 <body>
 
 <!-- ======================= HEADER ======================= -->
-<header class="site-header" id="siteHeader">
+<header class="site-header">
   <div class="container header-inner">
-    <a href="#top" class="brand" aria-label="Accueil">
-      <span class="brand-logo" id="brandLogo" aria-hidden="true">◆</span>
-      <span class="brand-name" id="brandName">NOM DE LA BOUTIQUE</span>
+    <a href="#top" class="brand" aria-label="Accueil MENSTORE">
+      <span class="brand-logo" aria-hidden="true">◆</span>
+      <span class="brand-name">MENSTORE</span>
     </a>
     <nav class="nav" aria-label="Navigation principale">
       <a href="#boutique">Boutique</a>
@@ -29,7 +296,7 @@
       <a href="#preuves">Avis</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a href="#" class="btn btn-primary btn-sm header-cta" id="headerCta" data-link="store">
+    <a href="https://encvafzw.mychariow.shop" class="btn btn-primary btn-sm header-cta" target="_blank" rel="noopener">
       Accéder à la boutique
     </a>
   </div>
@@ -42,45 +309,63 @@
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-inner">
       <div class="hero-text">
-        <span class="badge" id="heroBadge">Boutique de produits numériques</span>
-        <h1 id="heroTitle">
-          Des ressources numériques pour progresser,<br/>
-          sans détour.
-        </h1>
-        <p class="lead" id="heroSubtitle">
-          Ebooks, guides pratiques et formations conçus pour vous apporter des méthodes
-          claires, actionnables et directement applicables.
+        <span class="badge">Boutique de produits numériques</span>
+        <h1>Des ressources numériques pour progresser,<br/>sans détour.</h1>
+        <p class="lead">
+          MENSTORE vous propose des ebooks, guides pratiques et formations
+          conçus pour vous apporter des méthodes claires, actionnables et
+          directement applicables.
         </p>
         <div class="hero-ctas">
-          <a href="#produits" class="btn btn-primary btn-lg" id="heroPrimary">
-            Découvrir nos produits
-          </a>
-          <a href="#" class="btn btn-ghost btn-lg" id="heroSecondary" data-link="store">
+          <a href="#produits" class="btn btn-primary btn-lg">Découvrir nos produits</a>
+          <a href="https://encvafzw.mychariow.shop" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">
             Accéder à la boutique
           </a>
         </div>
-
-        <ul class="hero-stats" id="heroStats" aria-label="Points clés"></ul>
+        <ul class="hero-stats" aria-label="Points clés">
+          <li><strong>100%</strong><span>Numérique</span></li>
+          <li><strong>Instantané</strong><span>Accès immédiat</span></li>
+          <li><strong>Sécurisé</strong><span>Via Chariow</span></li>
+        </ul>
       </div>
 
-      <div class="hero-visual" id="heroVisual" aria-label="Visuel principal de la boutique">
-        <!-- Rendu dynamique par script.js -->
+      <div class="hero-visual" aria-label="Visuel principal MENSTORE">
+        <!-- Remplacer IMG_5245.png par le visuel souhaité, ou laisser l'emplacement -->
+        <img src="IMG_5245.png" alt="Visuel MENSTORE" loading="eager" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="hero-placeholder" style="display:none">
+          <div class="ph-icon">◈</div>
+          <div class="ph-title">Visuel principal</div>
+          <div class="ph-sub">Emplacement réservé — ajoutez une image ou une illustration</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ======================= MISSION & VALEURS ======================= -->
-  <section class="mission" id="mission">
+  <section class="mission">
     <div class="container">
       <header class="section-head">
         <span class="eyebrow">Notre approche</span>
-        <h2 id="missionTitle">Une boutique pensée pour des résultats concrets</h2>
-        <p id="missionText">
-          Nous créons des ressources numériques qui vont à l'essentiel : des contenus
-          structurés, testés et faciles à appliquer, pour vous faire gagner du temps.
-        </p>
+        <h2>Une boutique pensée pour des résultats concrets</h2>
+        <p>MENSTORE crée des ressources numériques qui vont à l'essentiel : des contenus structurés, testés et faciles à appliquer, pour vous faire gagner du temps.</p>
       </header>
-      <div class="values-grid" id="valuesGrid"></div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">◆</div>
+          <h3>Clarté</h3>
+          <p>Des contenus structurés, lisibles, sans jargon inutile.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">◇</div>
+          <h3>Qualité</h3>
+          <p>Des ressources conçues avec soin, mises à jour régulièrement.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">◈</div>
+          <h3>Résultats</h3>
+          <p>Des méthodes actionnables dès le premier jour.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -89,17 +374,102 @@
     <div class="container">
       <header class="section-head">
         <span class="eyebrow">Nos produits</span>
-        <h2 id="productsTitle">Quelques exemples de nos ressources</h2>
-        <p id="productsSubtitle">
-          Chaque produit répond à un besoin précis. Les achats sont sécurisés
-          et s'effectuent sur Chariow.
-        </p>
+        <h2>Quelques exemples de nos ressources</h2>
+        <p>Chaque produit répond à un besoin précis. Les achats sont sécurisés et s'effectuent sur Chariow.</p>
       </header>
 
-      <div class="product-grid" id="productGrid"></div>
+      <div class="product-grid">
+
+        <!-- ============================================================
+             PRODUIT 1 — Remplacer le nom, la description, les bénéfices,
+             le prix, l'image et le lien Chariow ci-dessous.
+             Si le lien est vide → le bouton reste désactivé.
+             ============================================================ -->
+        <article class="product-card">
+          <div class="product-media">
+            <div class="media-ph">
+              <div class="ph-icon">◈</div>
+              <div class="ph-text">Visuel du produit<br/>à ajouter</div>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-category">Ebook</span>
+            <h3>Nom du produit #1</h3>
+            <p class="product-desc">Description courte du produit. Décrivez la valeur principale et le problème résolu.</p>
+            <ul class="benefits">
+              <li>Bénéfice principal 1</li>
+              <li>Bénéfice principal 2</li>
+              <li>Bénéfice principal 3</li>
+            </ul>
+            <div class="product-footer">
+              <div class="price"><strong>Prix à définir</strong><small>Paiement unique</small></div>
+              <!-- ⚠️ Remplacer href="" par le lien Chariow du produit -->
+              <a class="btn btn-primary btn-sm" href="" target="_blank" rel="noopener"
+                 onclick="if(!this.getAttribute('href')){return false;}">
+                Découvrir le produit
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRODUIT 2 -->
+        <article class="product-card">
+          <div class="product-media">
+            <div class="media-ph">
+              <div class="ph-icon">◈</div>
+              <div class="ph-text">Visuel du produit<br/>à ajouter</div>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-category">Guide pratique</span>
+            <h3>Nom du produit #2</h3>
+            <p class="product-desc">Description courte du produit. Décrivez la valeur principale et le problème résolu.</p>
+            <ul class="benefits">
+              <li>Bénéfice principal 1</li>
+              <li>Bénéfice principal 2</li>
+              <li>Bénéfice principal 3</li>
+            </ul>
+            <div class="product-footer">
+              <div class="price"><strong>Prix à définir</strong><small>Paiement unique</small></div>
+              <a class="btn btn-primary btn-sm" href="" target="_blank" rel="noopener"
+                 onclick="if(!this.getAttribute('href')){return false;}">
+                Découvrir le produit
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRODUIT 3 -->
+        <article class="product-card">
+          <div class="product-media">
+            <div class="media-ph">
+              <div class="ph-icon">◈</div>
+              <div class="ph-text">Visuel du produit<br/>à ajouter</div>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-category">Formation</span>
+            <h3>Nom du produit #3</h3>
+            <p class="product-desc">Description courte du produit. Décrivez la valeur principale et le problème résolu.</p>
+            <ul class="benefits">
+              <li>Bénéfice principal 1</li>
+              <li>Bénéfice principal 2</li>
+              <li>Bénéfice principal 3</li>
+            </ul>
+            <div class="product-footer">
+              <div class="price"><strong>Prix à définir</strong><small>Paiement unique</small></div>
+              <a class="btn btn-primary btn-sm" href="" target="_blank" rel="noopener"
+                 onclick="if(!this.getAttribute('href')){return false;}">
+                Découvrir le produit
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
 
       <div class="products-cta">
-        <a href="#" class="btn btn-outline btn-lg" id="productsAllCta" data-link="store">
+        <a href="https://encvafzw.mychariow.shop" class="btn btn-outline btn-lg" target="_blank" rel="noopener">
           Voir toute la boutique sur Chariow
         </a>
         <p class="microcopy">Paiement sécurisé · Accès immédiat après achat</p>
@@ -114,42 +484,131 @@
       <!-- 3.A — TÉMOIGNAGES WHATSAPP -->
       <header class="section-head section-head-light">
         <span class="eyebrow eyebrow-light">Retours clients</span>
-        <h2 id="testimonialsTitle">Ils ont testé, voici leurs retours</h2>
-        <p id="testimonialsSubtitle">
-          Captures d'écran authentiques de discussions WhatsApp avec nos clients.
-        </p>
+        <h2>Ils ont testé, voici leurs retours</h2>
+        <p>Captures d'écran authentiques de discussions WhatsApp avec nos clients.</p>
       </header>
 
-      <div class="wa-grid" id="waGrid"></div>
+      <div class="wa-grid">
+
+        <!-- EMPLACEMENT TÉMOIGNAGE 1 — remplacer le bloc par :
+             <button class="wa-card" data-lightbox="wa-1.jpg" aria-label="Témoignage 1">
+               <img src="wa-1.jpg" alt="Témoignage client 1" loading="lazy" />
+             </button>
+             ⚠️ Masquez les numéros et noms avant import. -->
+        <div class="wa-card">
+          <div class="wa-ph">
+            <div class="ph-icon">💬</div>
+            <div class="ph-text">Capture WhatsApp<br/>à ajouter</div>
+            <div class="ph-num">EMPLACEMENT #1</div>
+          </div>
+        </div>
+
+        <!-- EMPLACEMENT TÉMOIGNAGE 2 -->
+        <div class="wa-card">
+          <div class="wa-ph">
+            <div class="ph-icon">💬</div>
+            <div class="ph-text">Capture WhatsApp<br/>à ajouter</div>
+            <div class="ph-num">EMPLACEMENT #2</div>
+          </div>
+        </div>
+
+        <!-- EMPLACEMENT TÉMOIGNAGE 3 -->
+        <div class="wa-card">
+          <div class="wa-ph">
+            <div class="ph-icon">💬</div>
+            <div class="ph-text">Capture WhatsApp<br/>à ajouter</div>
+            <div class="ph-num">EMPLACEMENT #3</div>
+          </div>
+        </div>
+
+        <!-- EMPLACEMENT TÉMOIGNAGE 4 -->
+        <div class="wa-card">
+          <div class="wa-ph">
+            <div class="ph-icon">💬</div>
+            <div class="ph-text">Capture WhatsApp<br/>à ajouter</div>
+            <div class="ph-num">EMPLACEMENT #4</div>
+          </div>
+        </div>
+
+      </div>
 
       <p class="proof-note">
-        Les informations personnelles visibles sur les captures (noms, numéros)
-        sont masquées ou anonymisées.
+        Les informations personnelles visibles sur les captures (noms, numéros) sont masquées ou anonymisées.
       </p>
 
       <!-- 3.B — PERFORMANCES -->
       <header class="section-head section-head-light section-head-sub">
         <span class="eyebrow eyebrow-light">Résultats</span>
-        <h2 id="performanceTitle">Des progrès concrets</h2>
-        <p id="performanceSubtitle">
-          Captures d'écran et indicateurs partagés par des clients ayant appliqué
-          les méthodes proposées.
-        </p>
+        <h2>Des progrès concrets</h2>
+        <p>Captures d'écran et indicateurs partagés par des clients ayant appliqué les méthodes proposées.</p>
       </header>
 
-      <div class="metrics-row" id="metricsRow"></div>
-      <div class="perf-grid" id="perfGrid"></div>
+      <div class="metrics-row">
+        <!-- Décommenter et remplir lorsque des données réelles sont disponibles :
+        <div class="metric-card"><strong>+0%</strong><span>Indicateur</span><small>Contexte</small></div>
+        -->
+      </div>
+
+      <div class="perf-grid">
+        <!-- EMPLACEMENT PERFORMANCE 1 -->
+        <article class="perf-card">
+          <div class="perf-media">
+            <div class="perf-ph">
+              <div class="ph-icon">📈</div>
+              <div class="ph-text">Capture de résultats<br/>à ajouter</div>
+              <div class="ph-num" style="font-size:10.5px;letter-spacing:.1em;color:rgba(255,255,255,.35)">EMPLACEMENT #1</div>
+            </div>
+          </div>
+          <div class="perf-body">
+            <h4>Titre de la preuve #1</h4>
+            <p>Courte explication du contexte : qui, quoi, sur quelle durée.</p>
+          </div>
+        </article>
+
+        <!-- EMPLACEMENT PERFORMANCE 2 -->
+        <article class="perf-card">
+          <div class="perf-media">
+            <div class="perf-ph">
+              <div class="ph-icon">📈</div>
+              <div class="ph-text">Capture de résultats<br/>à ajouter</div>
+              <div class="ph-num" style="font-size:10.5px;letter-spacing:.1em;color:rgba(255,255,255,.35)">EMPLACEMENT #2</div>
+            </div>
+          </div>
+          <div class="perf-body">
+            <h4>Titre de la preuve #2</h4>
+            <p>Courte explication du contexte : qui, quoi, sur quelle durée.</p>
+          </div>
+        </article>
+      </div>
+
     </div>
   </section>
 
-  <!-- ======================= FAQ (composant annexe) ======================= -->
+  <!-- ======================= FAQ ======================= -->
   <section class="section faq" id="faq">
     <div class="container container-narrow">
       <header class="section-head">
         <span class="eyebrow">Questions fréquentes</span>
-        <h2 id="faqTitle">Vous avez des questions ?</h2>
+        <h2>Vous avez des questions ?</h2>
       </header>
-      <div class="faq-list" id="faqList"></div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Où s'effectuent les achats ?</summary>
+          <p>Toutes les transactions sont réalisées sur Chariow, notre plateforme de vente sécurisée. Vous êtes redirigé vers la page officielle de chaque produit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Les produits sont-ils numériques ?</summary>
+          <p>Oui. Tous les produits MENSTORE sont des ressources numériques (ebooks, guides, formations).</p>
+        </details>
+        <details class="faq-item">
+          <summary>Comment accéder à mon achat ?</summary>
+          <p>Après paiement sur Chariow, vous recevez immédiatement les instructions pour accéder à votre produit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Puis-je vous contacter ?</summary>
+          <p>Bien sûr. Retrouvez nos coordonnées dans le pied de page. Nous répondons dans les meilleurs délais.</p>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -157,8 +616,8 @@
   <section class="cta-final">
     <div class="container cta-inner">
       <h2>Prêt à découvrir nos ressources ?</h2>
-      <p>Tous nos produits sont disponibles sur notre boutique officielle Chariow.</p>
-      <a href="#" class="btn btn-primary btn-lg" id="finalCta" data-link="store">
+      <p>Tous les produits MENSTORE sont disponibles sur notre boutique officielle Chariow.</p>
+      <a href="https://encvafzw.mychariow.shop" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
         Accéder à la boutique
       </a>
     </div>
@@ -172,32 +631,46 @@
 
     <div class="footer-col footer-brand">
       <a href="#top" class="brand brand-light">
-        <span class="brand-logo" id="footerLogo" aria-hidden="true">◆</span>
-        <span class="brand-name" id="footerName">NOM DE LA BOUTIQUE</span>
+        <span class="brand-logo" aria-hidden="true">◆</span>
+        <span class="brand-name">MENSTORE</span>
       </a>
-      <p class="footer-about" id="footerAbout"></p>
+      <p class="footer-about">MENSTORE — boutique de produits numériques conçus pour vous aider à progresser concrètement.</p>
     </div>
 
     <div class="footer-col">
       <h4>Boutique</h4>
-      <ul id="footerNav"></ul>
+      <ul>
+        <li><a href="https://encvafzw.mychariow.shop" target="_blank" rel="noopener">Boutique Chariow ↗</a></li>
+        <li><a href="#boutique">Boutique</a></li>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#preuves">Avis</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
     </div>
 
     <div class="footer-col">
       <h4>Contact</h4>
-      <ul id="footerContact"></ul>
+      <ul>
+        <li class="placeholder-line">Coordonnées à renseigner</li>
+      </ul>
     </div>
 
     <div class="footer-col">
       <h4>Réseaux</h4>
-      <ul id="footerSocials"></ul>
+      <ul>
+        <li class="placeholder-line">Réseaux à renseigner</li>
+      </ul>
     </div>
 
   </div>
 
   <div class="container footer-bottom">
-    <span id="footerCopyright">© <span id="year"></span> NOM DE LA BOUTIQUE. Tous droits réservés.</span>
-    <ul class="legal" id="footerLegal"></ul>
+    <span>© <span id="year"></span> MENSTORE. Tous droits réservés.</span>
+    <ul class="legal">
+      <li><a href="#">Mentions légales</a></li>
+      <li><a href="#">Politique de confidentialité</a></li>
+      <li><a href="#">Conditions générales</a></li>
+    </ul>
   </div>
 </footer>
 
@@ -207,13 +680,58 @@
   <img alt="" />
 </div>
 
-<noscript>
-  <div style="padding:32px;text-align:center;font-family:sans-serif;background:#0A1628;color:#fff">
-    Activez JavaScript pour afficher toutes les sections de la boutique.
-  </div>
-</noscript>
+<script>
+  (function () {
+    'use strict';
 
-<script src="config.js"></script>
-<script src="script.js"></script>
+    // Année dynamique dans le pied de page
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Neutralisation des liens produits vides
+    document.querySelectorAll('.product-footer a[href=""]').forEach(function (btn) {
+      btn.classList.add('btn-pending');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.removeAttribute('href');
+      btn.textContent = 'Lien à renseigner';
+      btn.addEventListener('click', function (e) { e.preventDefault(); });
+    });
+
+    // Lightbox pour les images WhatsApp et performances
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb ? lb.querySelector('img') : null;
+
+    function openLb(src, alt) {
+      if (!lb || !lbImg) return;
+      lbImg.src = src;
+      lbImg.alt = alt || 'Aperçu';
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      if (!lb) return;
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.removeAttribute('src');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('[data-lightbox]');
+      if (trigger) {
+        e.preventDefault();
+        openLb(trigger.getAttribute('data-lightbox'), trigger.getAttribute('aria-label'));
+        return;
+      }
+      if (e.target.closest('.lightbox-close') || e.target === lb) closeLb();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLb();
+    });
+
+  })();
+</script>
+
 </body>
 </html>
