@@ -10,7 +10,7 @@ const CONFIG = {
   store: {
     name: "MENSTORE",
     logoText: "◆",                    // symbole affiché à la place du logo
-    logoImage: "",                    // ex: "images/logo.png" (laisser vide pour le symbole)
+    logoImage: "IMG_2452.png",                    // ex: "images/logo.png" (laisser vide pour le symbole)
     chariowUrl: "",                   // ⚠️ LIEN GÉNÉRAL CHARIOW — laisser vide pour l'instant
     tagline: "Produits numériques conçus pour vous faire progresser.",
     email: "",                        // À RENSEIGNER
@@ -33,7 +33,7 @@ const CONFIG = {
     subtitle: "Ebooks, guides pratiques et formations conçus pour vous apporter des méthodes claires, actionnables et directement applicables.",
     primaryCta: "Découvrir nos produits",
     secondaryCta: "Accéder à la boutique",
-    image: "",                        // chemin optionnel : "images/hero.jpg"
+    image: "IMG_2452.png",                        // chemin optionnel : "images/hero.jpg"
     placeholderIcon: "◈",
     placeholderTitle: "Visuel principal",
     placeholderSub: "Emplacement réservé — ajoutez une image, une illustration ou une capture",
