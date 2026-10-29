@@ -32,6 +32,7 @@
       --shadow-md:   0 12px 32px -12px rgba(10,22,40,.18);
       --shadow-lg:   0 30px 60px -25px rgba(10,22,40,.28);
       --container:   1200px;
+      --ease-out:    cubic-bezier(.2,.7,.2,1);
     }
 
     *,*::before,*::after { box-sizing: border-box; }
@@ -51,12 +52,18 @@
     .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 24px; }
     .container-narrow { max-width: 820px; }
 
+    /* Compensation du header sticky sur les ancres */
+    section[id] { scroll-margin-top: 88px; }
+
+    /* ===== BOUTONS ===== */
     .btn {
+      position: relative; overflow: hidden;
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 12px 22px; border-radius: var(--radius-sm);
       font-weight: 700; font-size: 15px; line-height: 1;
-      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      transition: transform .25s var(--ease-out), background .25s ease, box-shadow .25s ease;
       white-space: nowrap; cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-sm { padding: 10px 16px; font-size: 13.5px; }
     .btn-lg { padding: 15px 26px; font-size: 15.5px; }
@@ -71,22 +78,46 @@
       border: 1.5px dashed var(--line); cursor: not-allowed;
       box-shadow: none !important; transform: none !important;
     }
+    .btn:active { transform: translateY(1px) scale(.99); }
 
+    /* Effet ripple au clic sur les boutons */
+    .btn .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,.45);
+      transform: scale(0); opacity: 1;
+      pointer-events: none;
+      animation: btn-ripple .65s var(--ease-out) forwards;
+    }
+    @keyframes btn-ripple {
+      to { transform: scale(2.6); opacity: 0; }
+    }
+
+    /* ===== HEADER ===== */
     .site-header {
       position: sticky; top: 0; z-index: 50;
       background: rgba(255,255,255,.88);
       backdrop-filter: saturate(180%) blur(14px);
       -webkit-backdrop-filter: saturate(180%) blur(14px);
       border-bottom: 1px solid var(--line);
+      transition: box-shadow .3s ease;
     }
+    .site-header.scrolled { box-shadow: 0 10px 30px -18px rgba(10,22,40,.25); }
     .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
     .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
-    .brand-logo { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--navy); color: #fff; font-size: 15px; font-weight: 800; }
+    .brand-logo { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--navy); color: #fff; font-size: 15px; font-weight: 800; transition: transform .4s var(--ease-out); }
+    .brand:hover .brand-logo { transform: rotate(-8deg) scale(1.05); }
     .brand-name { font-size: 15px; letter-spacing: -.01em; color: var(--navy); }
     .nav { display: flex; gap: 28px; }
-    .nav a { font-size: 14px; font-weight: 600; color: var(--muted); transition: color .2s ease; }
+    .nav a { position: relative; font-size: 14px; font-weight: 600; color: var(--muted); transition: color .25s ease; }
+    .nav a::after {
+      content: ""; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
+      background: var(--accent); border-radius: 2px;
+      transition: width .3s var(--ease-out);
+    }
     .nav a:hover { color: var(--navy); }
+    .nav a:hover::after { width: 100%; }
 
+    /* ===== HERO ===== */
     .hero {
       position: relative; padding: 96px 0 100px;
       color: #fff;
@@ -101,6 +132,7 @@
         linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 60px 60px,
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 60px 60px;
       mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
     }
     .hero-inner { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center; }
     .badge {
@@ -122,7 +154,8 @@
       border: 1px solid rgba(255,255,255,.1); box-shadow: var(--shadow-lg);
       position: relative; display: flex; align-items: center; justify-content: center;
     }
-    .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+    .hero-visual:hover img { transform: scale(1.03); }
     .hero-placeholder {
       position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 14px; padding: 24px; text-align: center;
@@ -132,14 +165,17 @@
     .hero-placeholder .ph-title { font-size: 15px; font-weight: 700; color: #fff; }
     .hero-placeholder .ph-sub { font-size: 12.5px; color: rgba(255,255,255,.55); max-width: 220px; line-height: 1.5; }
 
+    /* ===== MISSION ===== */
     .mission { padding: 96px 0; background: var(--surface); }
     .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .value-card { padding: 32px 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .value-card { padding: 32px 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); transition: transform .35s var(--ease-out), box-shadow .35s ease, border-color .35s ease; }
     .value-card:hover { transform: translateY(-4px); border-color: #C9D2E0; box-shadow: var(--shadow-md); }
-    .value-card .value-icon { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(37,99,235,.08); color: var(--accent); font-size: 20px; margin-bottom: 18px; }
+    .value-card .value-icon { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(37,99,235,.08); color: var(--accent); font-size: 20px; margin-bottom: 18px; transition: transform .35s var(--ease-out), background .35s ease; }
+    .value-card:hover .value-icon { transform: scale(1.08) rotate(-6deg); background: rgba(37,99,235,.14); }
     .value-card h3 { font-size: 16px; font-weight: 800; margin: 0 0 8px; }
     .value-card p { font-size: 14.5px; color: var(--muted); margin: 0; line-height: 1.6; }
 
+    /* ===== SECTIONS ===== */
     .section { padding: 100px 0; }
     .section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
     .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 12px 0 14px; }
@@ -153,20 +189,20 @@
     /* ===== PRODUITS ===== */
     .products { background: #fff; }
     .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .product-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-    .product-card:hover { transform: translateY(-4px); border-color: #C9D2E0; box-shadow: var(--shadow-md); }
+    .product-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .4s var(--ease-out), box-shadow .4s ease, border-color .4s ease; }
+    .product-card:hover { transform: translateY(-6px); border-color: #C9D2E0; box-shadow: var(--shadow-md); }
     .product-media {
       position: relative; aspect-ratio: 4 / 3;
       background: linear-gradient(135deg, var(--navy-2), var(--navy-3));
       overflow: hidden;
     }
-    /* L'image remplit automatiquement la zone sans déformation, cadrage centré */
     .product-media img {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center;
+      transition: transform .8s var(--ease-out);
     }
-    /* Tant que le chemin n'est pas renseigné, on ne montre pas d'image cassée */
+    .product-card:hover .product-media img { transform: scale(1.06); }
     .product-media img[src=""],
     .product-media img:not([src]) { display: none; }
 
@@ -187,10 +223,10 @@
     /* ===== PREUVES ===== */
     .proof { background: linear-gradient(180deg, var(--navy) 0%, var(--black) 100%); color: #fff; }
     .wa-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .wa-card { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; }
-    .wa-card:hover { transform: translateY(-4px); border-color: rgba(37,99,235,.55); box-shadow: 0 20px 40px -20px rgba(37,99,235,.4); }
-    /* Image entière visible, aucune coupe, ratio conservé */
-    .wa-card img { width: 100%; height: 100%; object-fit: contain; object-position: center; cursor: zoom-in; }
+    .wa-card { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: transform .4s var(--ease-out), border-color .4s ease, box-shadow .4s ease; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; }
+    .wa-card:hover { transform: translateY(-6px); border-color: rgba(37,99,235,.55); box-shadow: 0 20px 40px -20px rgba(37,99,235,.4); }
+    .wa-card img { width: 100%; height: 100%; object-fit: contain; object-position: center; cursor: zoom-in; transition: transform .8s var(--ease-out); }
+    .wa-card:hover img { transform: scale(1.04); }
     .wa-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; text-align: center; cursor: default; background: repeating-linear-gradient(135deg, rgba(255,255,255,.02), rgba(255,255,255,.02) 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px); }
     .wa-ph .ph-icon { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: rgba(37,99,235,.16); border: 1px solid rgba(37,99,235,.35); font-size: 20px; }
     .wa-ph .ph-text { font-size: 12.5px; color: rgba(255,255,255,.6); line-height: 1.5; }
@@ -205,19 +241,19 @@
     .metric-card small { display: block; font-size: 11.5px; color: rgba(255,255,255,.45); margin-top: 8px; }
 
     .perf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .perf-card { border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: transform .25s ease, border-color .25s ease; }
-    .perf-card:hover { transform: translateY(-3px); border-color: rgba(37,99,235,.5); }
-    .perf-media { aspect-ratio: 16 / 10; background: rgba(255,255,255,.02); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,.08); position: relative; }
-    /* Image entière visible, jamais coupée, centrée — même logique que les témoignages */
-.perf-media img {
-  width: 100%; height: 100%;
-  object-fit: contain;
-  object-position: center;
-  cursor: zoom-in;
-}
-/* Tant que le chemin n'est pas renseigné, on n'affiche pas d'image cassée */
-.perf-media img[src=""],
-.perf-media img:not([src]) { display: none; }
+    .perf-card { border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: transform .4s var(--ease-out), border-color .4s ease; }
+    .perf-card:hover { transform: translateY(-4px); border-color: rgba(37,99,235,.5); }
+    .perf-media { aspect-ratio: 16 / 10; background: rgba(255,255,255,.02); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,.08); position: relative; overflow: hidden; }
+    .perf-media img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      cursor: zoom-in;
+      transition: transform .8s var(--ease-out);
+    }
+    .perf-card:hover .perf-media img { transform: scale(1.04); }
+    .perf-media img[src=""],
+    .perf-media img:not([src]) { display: none; }
     .perf-ph { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px; text-align: center; }
     .perf-ph .ph-icon { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: rgba(37,99,235,.15); border: 1px solid rgba(37,99,235,.35); font-size: 20px; }
     .perf-ph .ph-text { font-size: 12.5px; color: rgba(255,255,255,.6); }
@@ -225,20 +261,23 @@
     .perf-body h4 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; color: #fff; }
     .perf-body p { font-size: 13px; color: rgba(255,255,255,.62); margin: 0; line-height: 1.55; }
 
+    /* ===== FAQ ===== */
     .faq { background: var(--surface); }
     .faq-list { display: flex; flex-direction: column; gap: 12px; }
-    .faq-item { border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease; }
+    .faq-item { border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; overflow: hidden; transition: border-color .25s ease, box-shadow .25s ease; }
     .faq-item[open] { border-color: rgba(37,99,235,.4); box-shadow: var(--shadow-sm); }
     .faq-item summary { list-style: none; cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 15px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
     .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--muted); transition: transform .2s ease; line-height: 1; }
+    .faq-item summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--muted); transition: transform .3s var(--ease-out); line-height: 1; }
     .faq-item[open] summary::after { content: "−"; }
     .faq-item p { margin: 0; padding: 0 22px 20px; color: var(--muted); font-size: 14.5px; line-height: 1.65; }
 
+    /* ===== CTA FINAL ===== */
     .cta-final { padding: 96px 0; text-align: center; color: #fff; background: radial-gradient(700px 400px at 50% 0%, rgba(37,99,235,.28), transparent 60%), linear-gradient(180deg, var(--navy), var(--black)); }
     .cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); margin: 0 0 12px; }
     .cta-inner p { color: rgba(255,255,255,.7); margin: 0 0 28px; font-size: 16px; }
 
+    /* ===== FOOTER ===== */
     .site-footer { background: var(--black); color: rgba(255,255,255,.65); padding: 72px 0 32px; }
     .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08); }
     .brand-light .brand-logo { background: var(--accent); }
@@ -246,20 +285,55 @@
     .footer-about { margin: 18px 0 0; font-size: 14px; line-height: 1.6; max-width: 320px; }
     .footer-col h4 { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 18px; }
     .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-    .footer-col a { font-size: 14px; transition: color .2s ease; }
-    .footer-col a:hover { color: #fff; }
+    .footer-col a { font-size: 14px; transition: color .2s ease, padding-left .2s ease; }
+    .footer-col a:hover { color: #fff; padding-left: 3px; }
     .footer-col .placeholder-line { font-size: 13px; color: rgba(255,255,255,.35); font-style: italic; }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 28px; font-size: 12.5px; }
     .legal { display: flex; gap: 22px; flex-wrap: wrap; }
     .legal a { font-size: 12.5px; }
     .legal a:hover { color: #fff; }
 
-    .lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,.9); backdrop-filter: blur(6px); }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 8px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); }
-    .lightbox-close { position: absolute; top: 20px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 26px; line-height: 1; display: grid; place-items: center; }
-    .lightbox-close:hover { background: rgba(255,255,255,.22); }
+    /* ===== LIGHTBOX (avec transitions) ===== */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+      background: rgba(0,0,0,.9); backdrop-filter: blur(6px);
+      visibility: hidden; opacity: 0;
+      transition: opacity .3s ease, visibility 0s linear .3s;
+    }
+    .lightbox.open { visibility: visible; opacity: 1; transition: opacity .3s ease; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 8px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); transform: scale(.94); transition: transform .35s var(--ease-out); }
+    .lightbox.open img { transform: scale(1); }
+    .lightbox-close { position: absolute; top: 20px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 26px; line-height: 1; display: grid; place-items: center; transition: background .2s ease, transform .3s var(--ease-out); }
+    .lightbox-close:hover { background: rgba(255,255,255,.22); transform: rotate(90deg); }
 
+    /* ===== ANIMATIONS AU SCROLL ===== */
+    /* N'active les styles cachés que si JS est actif (classe .anim-ready sur <html>) */
+    .anim-ready .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity .8s var(--ease-out) var(--delay, 0ms),
+        transform .8s var(--ease-out) var(--delay, 0ms);
+      will-change: opacity, transform;
+    }
+    .anim-ready .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPECT prefers-reduced-motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .anim-ready .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; gap: 48px; }
       .hero-visual { max-width: 480px; margin: 0 auto; aspect-ratio: 4 / 3; width: 100%; }
@@ -386,10 +460,7 @@
 
       <div class="product-grid">
 
-        <!-- ============================================================
-             PRODUIT 1 — Renseigne le src de l'image + les textes + le lien.
-             Cadrage automatique (object-fit: cover, ratio 4:3).
-             ============================================================ -->
+        <!-- PRODUIT 1 -->
         <article class="product-card">
           <div class="product-media">
             <img src="ex1.jpg" alt="Visuel produit — Système de Productivité 1%1" loading="lazy" />
@@ -404,7 +475,6 @@
               <li>Et Avance chaque jour vers tes Objectifs</li>
             </ul>
             <div class="product-footer">
-              
               <a class="btn btn-primary btn-sm" href="https://encvafzw.mychariow.shop/prd_bgn7ohb7" target="_blank" rel="noopener"
                  onclick="if(!this.getAttribute('href')){return false;}">
                 Découvrir le produit
@@ -428,7 +498,6 @@
               <li>Et Apprends à Transformer tes Prospects</li>
             </ul>
             <div class="product-footer">
-              
               <a class="btn btn-primary btn-sm" href="https://encvafzw.mychariow.shop/prd_5r80l6dw" target="_blank" rel="noopener"
                  onclick="if(!this.getAttribute('href')){return false;}">
                 Découvrir le produit
@@ -449,10 +518,8 @@
             <ul class="benefits">
               <li>Contrôle mieux ton Temps maintenant</li>
               <li>Et Transforme des Intentions en Actions Concrètes</li>
-              
             </ul>
             <div class="product-footer">
-              
               <a class="btn btn-primary btn-sm" href="https://encvafzw.mychariow.shop/prd_4rtm1svu" target="_blank" rel="noopener"
                  onclick="if(!this.getAttribute('href')){return false;}">
                 Découvrir le produit
@@ -476,7 +543,6 @@
   <section class="section proof" id="preuves">
     <div class="container">
 
-      <!-- TÉMOIGNAGES WHATSAPP : image entière visible (object-fit: contain) -->
       <header class="section-head section-head-light">
         <span class="eyebrow eyebrow-light">Retours clients</span>
         <h2>Ils ont testé, voici leurs retours</h2>
@@ -507,7 +573,6 @@
         Les informations personnelles visibles sur les captures (noms, numéros) sont masquées ou anonymisées.
       </p>
 
-      <!-- PERFORMANCES -->
       <header class="section-head section-head-light section-head-sub">
         <span class="eyebrow eyebrow-light">Résultats</span>
         <h2>Des progrès concrets</h2>
@@ -517,31 +582,28 @@
       <div class="metrics-row"></div>
 
       <div class="perf-grid">
-  <!-- ============================================================
-       PERFORMANCE 1 — Renseigne le src de l'image + le texte.
-       Cadrage automatique (object-fit: contain → image entière).
-       ============================================================ -->
-  <article class="perf-card">
-    <div class="perf-media">
-      <img src="" alt="Capture de résultats #1" loading="lazy" data-lightbox="" />
-    </div>
-    <div class="perf-body">
-      <h4>Titre de la preuve #1</h4>
-      <p>Courte explication du contexte : qui, quoi, sur quelle durée.</p>
-    </div>
-  </article>
 
-  <!-- PERFORMANCE 2 -->
-  <article class="perf-card">
-    <div class="perf-media">
-      <img src="" alt="Capture de résultats #2" loading="lazy" data-lightbox="" />
-    </div>
-    <div class="perf-body">
-      <h4>Titre de la preuve #2</h4>
-      <p>Courte explication du contexte : qui, quoi, sur quelle durée.</p>
-    </div>
-  </article>
-</div>
+        <article class="perf-card">
+          <div class="perf-media">
+            <img src="" alt="Capture de résultats #1" loading="lazy" data-lightbox="" />
+          </div>
+          <div class="perf-body">
+            <h4>Titre de la preuve #1</h4>
+            <p>Courte explication du contexte : qui, quoi, sur quelle durée.</p>
+          </div>
+        </article>
+
+        <article class="perf-card">
+          <div class="perf-media">
+            <img src="" alt="Capture de résultats #2" loading="lazy" data-lightbox="" />
+          </div>
+          <div class="perf-body">
+            <h4>Titre de la preuve #2</h4>
+            <p>Courte explication du contexte : qui, quoi, sur quelle durée.</p>
+          </div>
+        </article>
+
+      </div>
 
     </div>
   </section>
@@ -644,9 +706,13 @@
   (function () {
     'use strict';
 
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ============ Année dynamique ============ */
     var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+    /* ============ Boutons produits vides ============ */
     document.querySelectorAll('.product-footer a[href=""]').forEach(function (btn) {
       btn.classList.add('btn-pending');
       btn.setAttribute('aria-disabled', 'true');
@@ -655,6 +721,119 @@
       btn.addEventListener('click', function (e) { e.preventDefault(); });
     });
 
+    /* ============ Sync data-lightbox images perf ============ */
+    document.querySelectorAll('.perf-media img').forEach(function (img) {
+      if (img.getAttribute('src')) img.setAttribute('data-lightbox', img.getAttribute('src'));
+    });
+
+    /* ============ Header scroll shadow ============ */
+    var header = document.querySelector('.site-header');
+    if (header) {
+      var onScrollHeader = function () {
+        header.classList.toggle('scrolled', window.scrollY > 8);
+      };
+      window.addEventListener('scroll', onScrollHeader, { passive: true });
+      onScrollHeader();
+    }
+
+    /* ============ Reveal au scroll ============ */
+    var canAnimate = !prefersReduced && 'IntersectionObserver' in window;
+
+    if (canAnimate) {
+      document.documentElement.classList.add('anim-ready');
+
+      // Groupes où l'on applique un délai en cascade (stagger)
+      var staggerGroups = [
+        '.hero-text > *',
+        '.hero-stats > li',
+        '.values-grid > .value-card',
+        '.product-grid > .product-card',
+        '.wa-grid > .wa-card',
+        '.perf-grid > .perf-card',
+        '.faq-list > .faq-item'
+      ];
+
+      // Applique --delay à chaque enfant
+      staggerGroups.forEach(function (selector) {
+        document.querySelectorAll(selector).forEach(function (el, i) {
+          el.style.setProperty('--delay', (i * 70) + 'ms');
+        });
+      });
+
+      // Éléments à révéler (sections + cartes + headers)
+      var revealSelectors = [
+        '.section-head',
+        '.hero-visual',
+        '.hero-text > .badge',
+        '.hero-text > h1',
+        '.hero-text > .lead',
+        '.hero-text > .hero-ctas',
+        '.hero-stats > li',
+        '.value-card',
+        '.product-card',
+        '.wa-card',
+        '.perf-card',
+        '.faq-item',
+        '.cta-inner',
+        '.footer-grid > .footer-col',
+        '.metrics-row > *'
+      ];
+      var revealEls = document.querySelectorAll(revealSelectors.join(','));
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -6% 0px'
+      });
+
+      revealEls.forEach(function (el) {
+        el.classList.add('reveal');
+        io.observe(el);
+      });
+
+      // Si un élément est déjà dans le viewport au chargement (héro),
+      // on déclenche immédiatement après un tick pour laisser respirer.
+      window.addEventListener('load', function () {
+        revealEls.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) {
+            el.classList.add('in-view');
+          }
+        });
+      });
+    }
+
+    /* ============ Ripple sur les boutons ============ */
+    if (!prefersReduced) {
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.btn');
+        if (!btn || btn.classList.contains('btn-pending')) return;
+
+        var rect = btn.getBoundingClientRect();
+        var size = Math.max(rect.width, rect.height);
+        var x = e.clientX - rect.left - size / 2;
+        var y = e.clientY - rect.top - size / 2;
+
+        var ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+
+        btn.appendChild(ripple);
+        setTimeout(function () {
+          if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
+        }, 700);
+      });
+    }
+
+    /* ============ Lightbox ============ */
     var lb = document.getElementById('lightbox');
     var lbImg = lb ? lb.querySelector('img') : null;
 
@@ -670,15 +849,21 @@
       if (!lb) return;
       lb.classList.remove('open');
       lb.setAttribute('aria-hidden', 'true');
-      lbImg.removeAttribute('src');
       document.body.style.overflow = '';
+      // On retire le src après la transition pour éviter le flash
+      setTimeout(function () {
+        if (!lb.classList.contains('open')) lbImg.removeAttribute('src');
+      }, 320);
     }
 
     document.addEventListener('click', function (e) {
       var trigger = e.target.closest('[data-lightbox]');
       if (trigger) {
-        e.preventDefault();
-        openLb(trigger.getAttribute('data-lightbox'), trigger.getAttribute('aria-label'));
+        var src = trigger.getAttribute('data-lightbox');
+        if (src) {
+          e.preventDefault();
+          openLb(src, trigger.getAttribute('aria-label'));
+        }
         return;
       }
       if (e.target.closest('.lightbox-close') || e.target === lb) closeLb();
