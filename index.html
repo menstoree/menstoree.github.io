@@ -277,16 +277,16 @@
     .cta-inner h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); margin: 0 0 12px; }
     .cta-inner p { color: rgba(255,255,255,.7); margin: 0 0 28px; font-size: 16px; }
 
-    /* Animation d'attention (vibration + onde lumineuse) sur le bouton principal du CTA final */
-    .cta-final .btn-primary {
+    /* Animation d'attention sur TOUS les boutons « Accéder à la boutique » (classe .btn-shop) */
+    .btn-shop {
       animation: cta-vibrate 3.5s infinite;
       will-change: transform, box-shadow;
     }
-    /* On met l'animation en pause au survol pour laisser cliquer sereinement */
-    .cta-final .btn-primary:hover,
-    .cta-final .btn-primary:active {
-      animation: none;
+    /* Pause au survol (souris uniquement) et au clic ; pas de "hover collé" sur mobile */
+    @media (hover: hover) {
+      .btn-shop:hover { animation: none; }
     }
+    .btn-shop:active { animation: none; }
     @keyframes cta-vibrate {
       0%, 72%, 100% { transform: translateX(0) scale(1); box-shadow: 0 0 0 0 rgba(37,99,235, 0.5); }
       75% { transform: translateX(-4px) rotate(-1.5deg) scale(1.03); }
@@ -353,6 +353,20 @@
       .anim-ready .reveal { opacity: 1; transform: none; }
     }
 
+    /* Pulsation douce : remplace la vibration quand l'appareil demande de réduire les animations
+       (ex. « Supprimer les animations » sur Android), pour que le bouton reste visible */
+    @keyframes shop-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,.55); }
+      60%      { box-shadow: 0 0 0 12px rgba(37,99,235,0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .btn.btn-shop {
+        animation-name: shop-pulse !important;
+        animation-duration: 2.5s !important;
+        animation-iteration-count: infinite !important;
+      }
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -397,7 +411,7 @@
       <a href="#preuves">Avis</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a href="https://encvafzw.mychariow.shop" class="btn btn-primary btn-sm header-cta" target="_blank" rel="noopener">
+    <a href="https://encvafzw.mychariow.shop" class="btn btn-primary btn-sm header-cta btn-shop" target="_blank" rel="noopener">
       Accéder à la boutique
     </a>
   </div>
@@ -419,7 +433,7 @@
         </p>
         <div class="hero-ctas">
           <a href="#produits" class="btn btn-primary btn-lg">Découvrir nos produits</a>
-          <a href="https://encvafzw.mychariow.shop" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">
+          <a href="https://encvafzw.mychariow.shop" class="btn btn-ghost btn-lg btn-shop" target="_blank" rel="noopener">
             Accéder à la boutique
           </a>
         </div>
@@ -661,7 +675,7 @@
     <div class="container cta-inner">
       <h2>Prêt à découvrir nos ressources ?</h2>
       <p>Tous les produits MENSTORE sont disponibles sur notre boutique officielle Chariow.</p>
-      <a href="https://encvafzw.mychariow.shop" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+      <a href="https://encvafzw.mychariow.shop" class="btn btn-primary btn-lg btn-shop" target="_blank" rel="noopener">
         Accéder à la boutique
       </a>
     </div>
